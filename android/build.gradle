@@ -25,9 +25,22 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace = "com.appleeducate.getversion"
+    if (project.android.hasProperty("namespace")) {
+        namespace 'com.appleeducate.getversion'
+    }
+    
     compileSdkVersion 33
+    def javaVersion = JavaVersion.VERSION_1_8
 
+    compileOptions {
+        sourceCompatibility javaVersion
+        targetCompatibility javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = "${javaVersion}"
+    }
+    
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
